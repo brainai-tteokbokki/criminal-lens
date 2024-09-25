@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>API Document</h1>
+<hr>
+
+<div class="card" style="width: 100%;">
+    <div class="card-body">
+        <h5 class="card-title">/api/search_object</h5>
+        <h6 class="card-subtitle mb-2 text-body-secondary">API to find out what object is in the image</h6>
+
+        <!-- Request -->
+        <div class="card" style="width: 18rem;">
+            <div class="card-header">
+                Method: POST
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">image: Image encoded in base64</li>
+            </ul>
+        </div><br>
+
+        <!-- Response -->
+        <div class="card" style="width: 18rem;">
+            <div class="card-header">
+                Arguments
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">image: Processed photos</li>
+                <li class="list-group-item">products: Text listing the items in the photo</li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
