@@ -6,7 +6,7 @@
     This project provides various services to society by inferring whether the face of a person in a photo resembles a wanted criminal.
 </p>
 <p style="font-size: 30px;">
-    You can try our service by clicking the link below! <a href="https://criminal-lens.streamlit.app/">Link</a>
+    You can try our service by clicking the link below! <a href="https://crimilens.streamlit.app/">Link</a>
 </p>
 <p style="font-size: 15px;">
     Are you curious about the server source code? <a href="https://github.com/brainai-tteokbokki/criminal-lens/tree/server">Look here</a>
