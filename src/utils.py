@@ -26,7 +26,7 @@ class FaceRecognition:
         self.reid_input_shape = self.reid_model.inputs[0].shape
 
     def load_model(self, model_path: str, device: str):
-        model = self.core.read_model(model_path + ".xml", model_path + ".bin")
+        model = self.core.read_model(f"{model_path}.xml", f"{model_path}")
         compiled_model = self.core.compile_model(model, device)
         return compiled_model
 

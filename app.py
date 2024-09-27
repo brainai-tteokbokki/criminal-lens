@@ -14,28 +14,28 @@ app.register_blueprint(api)
 def home():
     return render_template('api/docs.html')
 
-# @app.errorhandler(Exception)
-# def handle_exception(e):
-#     response = {
-#         "error": True,
-#         "detail": "An unexpected error occurred.",
-#     }
+@app.errorhandler(Exception)
+def handle_exception(e):
+    response = {
+        "error": True,
+        "detail": "An unexpected error occurred.",
+    }
     
-#     code = -1
+    code = -1
     
-#     if hasattr(e, 'code'):
-#         code = e.code
-#     message = str(e)
+    if hasattr(e, 'code'):
+        code = e.code
+    message = str(e)
     
-#     response.update({'error_code': code})
-#     response.update({"detail": message})
+    response.update({'error_code': code})
+    response.update({"detail": message})
     
-#     if code == 404:
-#         response.update({"detail": "This is not a valid endpoint."})
+    if code == 404:
+        response.update({"detail": "This is not a valid endpoint."})
         
-#     print(f"Error: {message}")
+    print(f"Error: {message}")
     
-#     return jsonify(response), code
+    return jsonify(response), code
 
 if __name__ == '__main__':
 	app.run(host=SERVER_HOST, port=SERVER_PORT, debug=True)
