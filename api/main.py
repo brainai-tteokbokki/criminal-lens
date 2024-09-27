@@ -10,8 +10,8 @@ DB_PATH = os.path.join("db", "info.json")
 
 api = Blueprint('api', __name__, url_prefix='/api')
 
-detection_model_path = "src/models/face-detection-adas-0001"
-reid_model_path = "src/models/face-reidentification-retail-0095"
+detection_model_path = "/home/azureuser/server/src/models/face-detection-adas-0001"
+reid_model_path = "/home/azureuser/server/src/models/face-reidentification-retail-0095"
 FaceRecodation = utils.FaceRecognition(detection_model_path, reid_model_path)
 
 @api.route("/list", methods=["GET"])
