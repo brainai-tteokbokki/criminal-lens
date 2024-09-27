@@ -1,0 +1,9 @@
+flask==3.0.3
+python-dotenv==1.0.1
+opencv-python==4.9.0.80
+ipywidgets==8.1.2
+openvino==2024.4.0
+openvino-dev==2024.4.0
+tensorflow==2.13.1
+gradio
+streamlit
