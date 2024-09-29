@@ -4,10 +4,14 @@
 <h1>API Document</h1>
 <hr>
 
+<p>authKey is not provided arbitrarily. Contact the administrator.</p>
+<p>Go to <a href="/">Home</a></p>
+
+<!-- /api/list documentation -->
 <div class="card" style="width: 100%;">
     <div class="card-body">
-        <h5 class="card-title">/api/search_object</h5>
-        <h6 class="card-subtitle mb-2 text-body-secondary">API to find out what object is in the image</h6>
+        <h5 class="card-title">/api/list</h5>
+        <h6 class="card-subtitle mb-2 text-body-secondary">Retrieve registered account information.</h6>
 
         <!-- Request -->
         <div class="card" style="width: 18rem;">
@@ -15,7 +19,7 @@
                 Method: POST
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">image: Image encoded in base64</li>
+                <li class="list-group-item">authKey: Authentication Key. (string)</li>
             </ul>
         </div><br>
 
@@ -25,11 +29,78 @@
                 Arguments
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">image: Processed photos</li>
-                <li class="list-group-item">products: Text listing the items in the photo</li>
+                <li class="list-group-item">error: Did an error occur? (bool)</li>
+                <li class="list-group-item">detail: status detail. (string)</li>
             </ul>
         </div>
-
     </div>
-</div>
+</div><br>
+
+<!-- /api/search documentation -->
+<div class="card" style="width: 100%;">
+    <div class="card-body">
+        <h5 class="card-title">/api/search</h5>
+        <h6 class="card-subtitle mb-2 text-body-secondary">API to find out what object is in the image</h6>
+
+        <!-- Request -->
+        <div class="card" style="width: 18rem;">
+            <div class="card-header">
+                Method: POST
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">authKey: Authentication Key. (string)</li>
+            </ul>
+        </div><br>
+
+        <!-- Response -->
+        <div class="card" style="width: 18rem;">
+            <div class="card-header">
+                Arguments
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">similar_info: Registered criminal suspected of resemblance. (object)</li>
+                <li class="list-group-item">suspect_info: Registered offender suspected of being a suspect. (object)</li>
+                <li class="list-group-item">error: Did an error occur? (bool)</li>
+                <li class="list-group-item">detail: status detail (str)</li>
+            </ul>
+        </div>
+    </div>
+</div><br>
+
+<!-- /api/regi documentation -->
+<div class="card" style="width: 100%;">
+    <div class="card-body">
+        <h5 class="card-title">/api/regi</h5>
+        <h6 class="card-subtitle mb-2 text-body-secondary">Register criminals to use when searching.</h6>
+
+        <!-- Request -->
+        <div class="card" style="width: 18rem;">
+            <div class="card-header">
+                Method: POST
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">authKey: Authentication Key. (string)</li>
+                <li class="list-group-item">crimi_name: Name of the offender to be registered. (string)</li>
+                <li class="list-group-item">crimi_desc: The crime and description of the offender to be registered. (string)</li>
+                <li class="list-group-item">crimi_image: The face of the criminal to be registered. (base64. string)</li>
+                <li class="list-group-item">is_agree: Whether or not you agree to the processing of personal information. (bool)</li>
+                <li class="list-group-item">regi_time: Registration time. (%Y%m%d_%H%M%S. string)</li>
+            </ul>
+        </div><br>
+
+        <!-- Response -->
+        <div class="card" style="width: 18rem;">
+            <div class="card-header">
+                Arguments
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">error: Did an error occur? (bool)</li>
+                <li class="list-group-item">detail: status detail (str)</li>
+            </ul>
+        </div>
+    </div>
+</div><br>
+
+
+
 {% endblock %}

