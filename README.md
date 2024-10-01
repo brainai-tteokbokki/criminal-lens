@@ -12,7 +12,7 @@
     Are you curious about the server source code? <a href="https://github.com/brainai-tteokbokki/criminal-lens/tree/server">Look here</a>
 </p>
 <p style="font-size: 15px;">
-    Want to see the app source code? <a href="https://github.com/brainai-tteokbokki/criminal-lens/tree/server">Look here</a>
+    Want to see the client source code? <a href="https://github.com/brainai-tteokbokki/criminal-lens/tree/server">Look here</a>
 </p>
 
 <p style="font-size: 20px;">
