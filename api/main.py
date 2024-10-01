@@ -5,11 +5,12 @@ import json
 from src import utils
 import os
 
-LOG_PATH = os.path.join("log")
-DB_PATH = os.path.join("db")
-TEMP_PATH = os.path.join("db", "temp_dir")
-INFO_DB_PATH = os.path.join("db", "info.json")
-AUTH_DB_PATH = os.path.join("db", "auth.json")
+LOG_PATH = os.path.join(os.getcwd(), "log")
+DB_PATH = os.path.join(os.getcwd(), "db")
+TEMP_PATH = os.path.join(DB_PATH, "temp_dir")
+DB_FACE_PATH = os.path.join(DB_PATH, "faces")
+INFO_DB_PATH = os.path.join(DB_PATH, "info.json")
+AUTH_DB_PATH = os.path.join(DB_PATH, "auth.json")
 
 detection_model_path = "/home/azureuser/server/src/models/face-detection-adas-0001"
 reid_model_path = "/home/azureuser/server/src/models/face-reidentification-retail-0095"
@@ -22,11 +23,17 @@ if not os.path.exists(LOG_PATH):
 
 if not os.path.exists(DB_PATH):
     os.makedirs(DB_PATH)
-    with open(INFO_DB_PATH, "w") as f:
-        json.dump([], f)
-    with open(AUTH_DB_PATH, "w") as f:
-        json.dump([], f)
-        
+    
+if not os.path.exists(INFO_DB_PATH):
+    with open(INFO_DB_PATH, "w") as info_db:
+        info_db.write(json.dumps([]))
+if not os.path.exists(AUTH_DB_PATH):
+    with open(AUTH_DB_PATH, "w") as auth_db:
+        auth_db.write(json.dumps([]))
+
+if not os.path.exists(DB_FACE_PATH):
+    os.makedirs(DB_FACE_PATH)
+
 if not os.path.exists(TEMP_PATH):
     os.makedirs(TEMP_PATH)
 
