@@ -18,3 +18,8 @@
 <p style="font-size: 20px;">
     <a href="https://sites.google.com/view/teamtteokbokki/home-%ED%99%88">Let me introduce our team.</a>
 </p>
+
+<p>
+    Be careful of personal information leakage when using the service.<br>
+    Our project is protected under the MIT License.
+</p>
