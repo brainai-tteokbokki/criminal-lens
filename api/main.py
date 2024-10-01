@@ -22,13 +22,13 @@ if not os.path.exists(LOG_PATH):
 
 if not os.path.exists(DB_PATH):
     os.makedirs(DB_PATH)
-    with open(DB_PATH, "w") as f:
+    with open(INFO_DB_PATH, "w") as f:
+        json.dump([], f)
+    with open(AUTH_DB_PATH, "w") as f:
         json.dump([], f)
         
 if not os.path.exists(TEMP_PATH):
     os.makedirs(TEMP_PATH)
-    with open(INFO_DB_PATH, "w") as f:
-        json.dump([], f)
 
 def veri_key(auth_key):
     with open(AUTH_DB_PATH, "r") as f:
