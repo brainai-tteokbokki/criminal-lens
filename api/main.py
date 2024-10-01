@@ -48,8 +48,12 @@ def veri_key(auth_key):
         
     for db_item in db:
         if db_item["authKey"] == auth_key:
-            logging.info(f"veri_auth: {client_ip()} Success. name<{db_item['userName']}> use_key<{db_item['authKey']}>")
-            return (db_item["userName"], db_item["authKey"])
+            if db_item["userLevel"] == 0:
+                logging.info(f"veri_auth: {client_ip()} Success. name<{db_item['userName']}> use_key<{db_item['authKey']}>")
+                return (db_item["userName"], db_item["authKey"])
+            else:
+                logging.info(f"veri_auth: {client_ip()} Low level. name<{db_item['userName']}> use_key<{db_item['authKey']}>")
+                return False
     
     logging.info(f"veri_auth: {client_ip()} Fail. use_key<{auth_key}>")
     return False
