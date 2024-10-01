@@ -87,9 +87,10 @@ def crimi_list():
     return jsonify(response), 200
 
 @api.route("/search", methods=["POST"])
-def search():
+def crimi_search():
     SIMILAR_LEVEL = 0.7
     SUSPECT_LEVEL = 0.5
+    image_ext = ["jpg", "jpeg", "png"]
     response = {
         "error": False,
         "detail": "",
@@ -97,22 +98,32 @@ def search():
     
     _res_key = request.form.get("authKey", None)
     is_auth = veri_key(_res_key)
-    _res_image = request.files.get("image", None)
+    _res_face = request.files.get("crimi_face", None)
     
     # 필수 파라미터 확인
-    if _res_image == None:
+    if _res_face == None:
         response.update({"error": True})
         response.update({"detail": "Required parameters are missing"})
         return jsonify(response), 400
     
-    # 얼굴 있냐 확인
-    _res_image.save(os.path.join(TEMP_PATH, "temp_search_input_face.jpg"))
-    if FaceRecodation.is_face(os.path.join(TEMP_PATH, "temp_search_input_face.jpg")) == False:
+    # 이미지 파일 아닐 경우 반려
+    if utils.get_file_ext(_res_face.filename) not in image_ext:
         response.update({"error": True})
-        response.update({"detail": "Upload only images that include the face."})
-        os.remove(os.path.join(TEMP_PATH, "temp_search_input_face.jpg"))
-        
+        response.update({"detail": f"Only image files are allowed: {', '.join(image_ext)}"})
         return jsonify(response), 400
+    
+    # 얼굴 있냐 확인
+    try:
+        _res_face.save(os.path.join(TEMP_PATH, "temp_search_input_face.jpg"))
+        if FaceRecodation.is_face(os.path.join(TEMP_PATH, "temp_search_input_face.jpg")) == False:
+            response.update({"error": True})
+            response.update({"detail": "Upload only images that include the face."})
+            os.remove(os.path.join(TEMP_PATH, "temp_search_input_face.jpg"))
+            return jsonify(response), 400
+    except:
+        response.update({"error": True})
+        response.update({"detail": "An unknown error has occurred. Please try again later."})
+        return jsonify(response), 500
     
     similar_info = []
     suspect_info = []
@@ -156,33 +167,40 @@ def search():
     return jsonify(response), 200
 
 @api.route("/regi", methods=["POST"])
-def regi():
+def crimi_regi():
+    image_ext = ["jpg", "jpeg", "png"]
     response = {
         "error": False,
         "detail": "",
     }
     
-    _regi_key = request.form.get('authKey', None)
-    _regi_name = request.form.get('crimi_name', None)
-    _regi_desc = request.form.get('crimi_desc', None)
-    _regi_image = request.files.get("crimi_image", None)
-    _regi_agree = request.form.get('is_agree', False)
-    _regi_time = request.form.get('regi_time', None)
+    _res_key = request.form.get('authKey', None)
+    _res_regi_name = request.form.get('crimi_name', None)
+    _res_regi_desc = request.form.get('crimi_desc', None)
+    _res_regi_face = request.files.get("crimi_face", None)
+    _res_regi_agree = request.form.get('is_agree', False)
+    _res_regi_time = request.form.get('regi_time', None)
     
     # 필수 파라미터 확인
-    if _regi_key == None or _regi_name == None or _regi_image == None or _regi_desc == None:
+    if _res_key == None or _res_regi_name == None or _res_regi_face == None or _res_regi_desc == None:
         response.update({"error": True})
         response.update({"detail": "Required parameters are missing"})
         return response, 400
     
+    # 이미지 파일 아닐 경우 반려
+    if utils.get_file_ext(_res_regi_face.filename) not in image_ext:
+        response.update({"error": True})
+        response.update({"detail": f"Only image files are allowed: {', '.join(image_ext)}"})
+        return jsonify(response), 400
+    
     # 약관 확인
-    if _regi_agree == False:
+    if _res_regi_agree == False:
         response.update({"error": True})
         response.update({"detail": "You must agree to the terms and conditions."})
-        return jsonify(response), 400    
+        return jsonify(response), 400
     
     # 얼굴 있냐 확인
-    _regi_image.save(os.path.join(TEMP_PATH, "temp_regi_input_face.jpg"))
+    _res_regi_face.save(os.path.join(TEMP_PATH, "temp_regi_input_face.jpg"))
     if FaceRecodation.is_face(os.path.join(TEMP_PATH, "temp_regi_input_face.jpg")) == False:
         response.update({"error": True})
         response.update({"detail": "Upload only images that include the face."})
@@ -193,7 +211,6 @@ def regi():
         with open(INFO_DB_PATH, "r") as f:
             db = json.load(f)
         
-        # 등록
         ## 얼굴 저장
         gen_rhash = utils.gen_rhash()
         save_file_name = f"{gen_rhash}.jpg"
@@ -205,7 +222,7 @@ def regi():
         ## 정보 저장
         ### 중복이냐?
         for db_item in db:
-            if db_item["crimi_name"] == _regi_name:
+            if db_item["crimi_name"] == _res_regi_name:
                 old_crimi_data = db_item
                 db.remove(db_item)
                 
@@ -221,9 +238,9 @@ def regi():
         
         ### 중복 아님
         crimi_data = {
-            "crimi_name": _regi_name,
-            "crimi_desc": _regi_desc,
-            "regi_time": _regi_time,
+            "crimi_name": _res_regi_name,
+            "crimi_desc": _res_regi_desc,
+            "regi_time": _res_regi_time,
             "crimi_face": [save_file_name]
         }
         db.append(crimi_data)
@@ -237,6 +254,54 @@ def regi():
             
     except Exception as e:
         print(e)
+        response.update({"error": True})
+        response.update({"detail": "An unknown error has occurred. Please try again later."})
+        return jsonify(response), 500
+
+@api.route("/del", methods=["POST"])
+def crimi_del():
+    response = {
+        "error": False,
+        "detail": "",
+    }
+    
+    _res_key = request.form.get("authKey", None)
+    is_auth = veri_key(_res_key)
+    _res_del_name = request.form.get("crimi_name", None)
+    
+    if is_auth == False:
+        response.update({"error": True})
+        response.update({"detail": "You do not have permission to edit this data."})
+        return jsonify(response), 403
+    
+    # 필수 파라미터 확인
+    if _res_del_name == None:
+        response.update({"error": True})
+        response.update({"detail": "Required parameters are missing"})
+        return jsonify(response), 400
+
+    # 정보 삭제
+    try:
+        with open(INFO_DB_PATH, "r") as f:
+            db = json.load(f)
+        
+        for db_item in db:
+            if db_item["crimi_name"] == _res_del_name:
+                for face in db_item["crimi_face"]:
+                    os.remove(os.path.join("db", "faces", face))
+                db.remove(db_item)
+                
+                with open(INFO_DB_PATH, "w") as f:
+                    json.dump(db, f)
+                
+                response.update({"error": False})
+                response.update({"detail": "Deletion successful"})
+                return jsonify(response), 200
+        
+        response.update({"error": True})
+        response.update({"detail": "There is no data to delete."})
+        return jsonify(response), 404
+    except Exception as e:
         response.update({"error": True})
         response.update({"detail": "An unknown error has occurred. Please try again later."})
         return jsonify(response), 500

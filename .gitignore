@@ -1,4 +1,4 @@
-/faces
-/temp_dir
-info.json
-auth.json
+/db/faces
+/db/temp_dir
+/db/info.json
+/db/auth.json

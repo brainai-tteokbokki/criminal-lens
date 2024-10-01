@@ -17,6 +17,11 @@ def gen_rhash(length=64):
     random_hash = hash_object.hexdigest()
     return random_hash[:length]
 
+def get_file_ext(file_name):
+    if '.' not in file_name:
+        return None
+    return file_name.split('.')[-1] 
+
 class FaceRecognition:
     def __init__(self, detection_model_path: str, reid_model_path: str, device: str = "CPU"):
         self.core = Core()

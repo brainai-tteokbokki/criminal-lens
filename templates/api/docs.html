@@ -1,106 +1,201 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        margin: 1% 1% 0% 1%;
+    }
+
+    table, th, td {
+        border: 1px solid black;
+    }
+
+    th, td {
+        padding: 8px;
+        text-align: left;
+    }    
+</style>
+
 <h1>API Document</h1>
 <hr>
 
+<h2>Description</h2>
 <p>authKey is not provided arbitrarily. Contact the administrator.</p>
 <p>Go to <a href="/">Home</a></p>
+<hr>
 
+<h2>Documentation</h2>
+<p>authKey is not a required parameter, but if you do not provide it to the server or it is incorrect, you will not be able to receive face data.</p>
 <!-- /api/list documentation -->
-<div class="card" style="width: 100%;">
+<div class="card mb-3">
     <div class="card-body">
-        <h5 class="card-title">/api/list</h5>
-        <h6 class="card-subtitle mb-2 text-body-secondary">Retrieve registered account information.</h6>
-
-        <!-- Request -->
-        <div class="card" style="width: 18rem;">
-            <div class="card-header">
-                Method: POST
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">authKey: Authentication Key. (string)</li>
-            </ul>
-        </div><br>
-
-        <!-- Response -->
-        <div class="card" style="width: 18rem;">
-            <div class="card-header">
-                Arguments
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">error: Did an error occur? (bool)</li>
-                <li class="list-group-item">detail: status detail. (string)</li>
-            </ul>
+        <h5>/api/list</h5>
+        <p class="text-muted">Retrieve registered account information.</p>
+        <div class="card mb-2">
+            <div class="card-header">Request - Method: POST</div>
+            <table class="table table-sm">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Key</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>authKey</td>
+                        <td>Authentication Key. (string)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="card">
+            <div class="card-header">Response</div>
+            <table class="table table-sm">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Key</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>error</td>
+                        <td>Did an error occur? (bool)</td>
+                    </tr>
+                    <tr>
+                        <td>detail</td>
+                        <td>Status detail. (string)</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
-</div><br>
+</div>
 
 <!-- /api/search documentation -->
-<div class="card" style="width: 100%;">
+<div class="card mb-3">
     <div class="card-body">
-        <h5 class="card-title">/api/search</h5>
-        <h6 class="card-subtitle mb-2 text-body-secondary">API to find out what object is in the image</h6>
-
-        <!-- Request -->
-        <div class="card" style="width: 18rem;">
-            <div class="card-header">
-                Method: POST
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">authKey: Authentication Key. (string)</li>
-            </ul>
-        </div><br>
-
-        <!-- Response -->
-        <div class="card" style="width: 18rem;">
-            <div class="card-header">
-                Arguments
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">similar_info: Registered criminal suspected of resemblance. (object)</li>
-                <li class="list-group-item">suspect_info: Registered offender suspected of being a suspect. (object)</li>
-                <li class="list-group-item">error: Did an error occur? (bool)</li>
-                <li class="list-group-item">detail: status detail (str)</li>
-            </ul>
+        <h5>/api/search</h5>
+        <p class="text-muted">API to find out what object is in the image</p>
+        <div class="card mb-2">
+            <div class="card-header">Request - Method: POST</div>
+            <table class="table table-sm">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Key</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>authKey</td>
+                        <td>Authentication Key. (string)</td>
+                    </tr>
+                    <tr>
+                        <td>crimi_face</td>
+                        <td>Find the criminal's face. (base64. string)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="card">
+            <div class="card-header">Response</div>
+            <table class="table table-sm">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Key</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>similar_info</td>
+                        <td>Registered criminal suspected of resemblance. (object)</td>
+                    </tr>
+                    <tr>
+                        <td>suspect_info</td>
+                        <td>Registered offender suspected of being a suspect. (object)</td>
+                    </tr>
+                    <tr>
+                        <td>error</td>
+                        <td>Did an error occur? (bool)</td>
+                    </tr>
+                    <tr>
+                        <td>detail</td>
+                        <td>Status detail (str)</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
-</div><br>
+</div>
 
 <!-- /api/regi documentation -->
-<div class="card" style="width: 100%;">
+<div class="card mb-3">
     <div class="card-body">
-        <h5 class="card-title">/api/regi</h5>
-        <h6 class="card-subtitle mb-2 text-body-secondary">Register criminals to use when searching.</h6>
-
-        <!-- Request -->
-        <div class="card" style="width: 18rem;">
-            <div class="card-header">
-                Method: POST
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">authKey: Authentication Key. (string)</li>
-                <li class="list-group-item">crimi_name: Name of the offender to be registered. (string)</li>
-                <li class="list-group-item">crimi_desc: The crime and description of the offender to be registered. (string)</li>
-                <li class="list-group-item">crimi_image: The face of the criminal to be registered. (base64. string)</li>
-                <li class="list-group-item">is_agree: Whether or not you agree to the processing of personal information. (bool)</li>
-                <li class="list-group-item">regi_time: Registration time. (%Y%m%d_%H%M%S. string)</li>
-            </ul>
-        </div><br>
-
-        <!-- Response -->
-        <div class="card" style="width: 18rem;">
-            <div class="card-header">
-                Arguments
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">error: Did an error occur? (bool)</li>
-                <li class="list-group-item">detail: status detail (str)</li>
-            </ul>
+        <h5>/api/regi</h5>
+        <p class="text-muted">Register criminals to use when searching.</p>
+        <div class="card mb-2">
+            <div class="card-header">Request - Method: POST</div>
+            <table class="table table-sm">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Key</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>authKey</td>
+                        <td>Authentication Key. (string)</td>
+                    </tr>
+                    <tr>
+                        <td>crimi_name</td>
+                        <td>Name of the offender to be registered. (string)</td>
+                    </tr>
+                    <tr>
+                        <td>crimi_desc</td>
+                        <td>The crime and description of the offender. (string)</td>
+                    </tr>
+                    <tr>
+                        <td>crimi_image</td>
+                        <td>The face of the criminal to be registered (base64. string)</td>
+                    </tr>
+                    <tr>
+                        <td>is_agree</td>
+                        <td>Agree to the processing of personal information. (bool)</td>
+                    </tr>
+                    <tr>
+                        <td>regi_time</td>
+                        <td>Registration time. (%Y%m%d_%H%M%S. string)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="card">
+            <div class="card-header">Response</div>
+            <table class="table table-sm">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Key</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>error</td>
+                        <td>Did an error occur? (bool)</td>
+                    </tr>
+                    <tr>
+                        <td>detail</td>
+                        <td>Status detail (str)</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
-</div><br>
-
-
+</div>
 
 {% endblock %}
