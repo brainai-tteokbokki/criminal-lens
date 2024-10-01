@@ -1,4 +1,2 @@
-/db/faces
-/db/temp_dir
-/db/info.json
-/db/auth.json
+/db
+nohup.out
