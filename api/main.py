@@ -1,4 +1,4 @@
-import time
+import logging
 from flask import Blueprint, render_template, jsonify, request
 from base64 import b64encode, b64decode
 import json
@@ -17,6 +17,8 @@ reid_model_path = "/home/azureuser/server/src/models/face-reidentification-retai
 
 api = Blueprint('api', __name__, url_prefix='/api')
 FaceRecodation = utils.FaceRecognition(detection_model_path, reid_model_path)
+
+logging.basicConfig(filename=os.path.join(LOG_PATH, 'access.log'), level=logging.INFO, format='%(asctime)s %(levelname)-8s %(message)s', encoding='utf-8')
 
 if not os.path.exists(LOG_PATH):
     os.makedirs(LOG_PATH)
@@ -37,14 +39,19 @@ if not os.path.exists(DB_FACE_PATH):
 if not os.path.exists(TEMP_PATH):
     os.makedirs(TEMP_PATH)
 
+def client_ip() -> str:
+    return request.remote_addr
+
 def veri_key(auth_key):
     with open(AUTH_DB_PATH, "r") as f:
         db = json.load(f)
         
     for db_item in db:
         if db_item["authKey"] == auth_key:
-            return True
+            logging.info(f"veri_auth: {client_ip()} Success. name<{db_item['userName']}> use_key<{db_item['authKey']}>")
+            return (db_item["userName"], db_item["authKey"])
     
+    logging.info(f"veri_auth: {client_ip()} Fail. use_key<{auth_key}>")
     return False
 
 @api.route("/", methods=["GET"])
@@ -71,22 +78,23 @@ def crimi_list():
                 "crimi_name": db_item["crimi_name"],
                 "crimi_desc": db_item["crimi_desc"],
                 "regi_time": db_item["regi_time"],
+                "regi_user": db_item.get("regi_user", "Unknown")
             })
             
-            if is_auth:
+            if is_auth != False:
                 send_db_info[-1]["crimi_face"] = []
                 for face in db_item["crimi_face"]:
                     with open(os.path.join("db", "faces", face), "rb") as f:
                         send_db_info[-1]["crimi_face"].append(b64encode(f.read()).decode())
         
     except Exception as e:
-        print(f"Error: {e}")
+        logging.error(f"Error: {e}")
         response.update({"error": True})
         response.update({"detail": "An unknown error has occurred. Please try again later."})
         return jsonify(response), 500
     
     response.update({"error": False})
-    if is_auth == True:
+    if is_auth != False:
         response.update({"detail": "Load successful"})
     else:
         response.update({"detail": "Load successful (Face data is not included)"})
@@ -128,7 +136,8 @@ def crimi_search():
             response.update({"detail": "Upload only images that include the face."})
             os.remove(os.path.join(TEMP_PATH, "temp_search_input_face.jpg"))
             return jsonify(response), 400
-    except:
+    except Exception as e:
+        logging.error(f"Error: {e}")
         response.update({"error": True})
         response.update({"detail": "An unknown error has occurred. Please try again later."})
         return jsonify(response), 500
@@ -150,17 +159,19 @@ def crimi_search():
             if similarity_score > SIMILAR_LEVEL:
                 similar_info.append({
                     "crimi_name": db_item["crimi_name"],
-                    "crimi_desc": db_item["crimi_desc"]
+                    "crimi_desc": db_item["crimi_desc"],
+                    "regi_user": db_item.get("regi_user", "Unknown")
                 })
-                if is_auth:
+                if is_auth != False:
                     similar_info[-1]["crimi_face"] = b64encode(base_face_data).decode()
                 break
             elif similarity_score > SUSPECT_LEVEL:
                 suspect_info.append({
                     "crimi_name": db_item["crimi_name"],
-                    "crimi_desc": db_item["crimi_desc"]
+                    "crimi_desc": db_item["crimi_desc"],
+                    "regi_user": db_item.get("regi_user", "Unknown")
                 })
-                if is_auth:
+                if is_auth != False:
                     suspect_info[-1]["crimi_face"] = b64encode(base_face_data).decode
                 break
     
@@ -168,7 +179,7 @@ def crimi_search():
         os.remove(os.path.join(TEMP_PATH, "temp_search_input_face.jpg"))
     
     response.update({"error": False})
-    if is_auth == True:
+    if is_auth != False:
         response.update({"detail": "Search successful"})
     else:
         response.update({"detail": "Search successful (Face data is not included)"})
@@ -186,6 +197,7 @@ def crimi_regi():
     }
     
     _res_key = request.form.get('authKey', None)
+    is_auth = veri_key(_res_key)
     _res_regi_name = request.form.get('crimi_name', None)
     _res_regi_desc = request.form.get('crimi_desc', None)
     _res_regi_face = request.files.get("crimi_face", None)
@@ -193,7 +205,7 @@ def crimi_regi():
     _res_regi_time = request.form.get('regi_time', None)
     
     # 필수 파라미터 확인
-    if _res_key == None or _res_regi_name == None or _res_regi_face == None or _res_regi_desc == None:
+    if _res_regi_name == None or _res_regi_face == None or _res_regi_desc == None:
         response.update({"error": True})
         response.update({"detail": "Required parameters are missing"})
         return response, 400
@@ -254,17 +266,23 @@ def crimi_regi():
             "regi_time": _res_regi_time,
             "crimi_face": [save_file_name]
         }
+        if is_auth != False:
+            crimi_data["regi_user"] = f"{client_ip()}({is_auth[0]})"
+        else:
+            crimi_data["regi_user"] = f"{client_ip()}"
+            
         db.append(crimi_data)
-        
         with open(INFO_DB_PATH, "w") as f:
             json.dump(db, f)
-            
+        
+        logging.info(f"{crimi_data['regi_user']} registered {crimi_data['crimi_name']}")
+        
         response.update({"error": False})
         response.update({"detail": "Registration successful"})
         return jsonify(response), 200        
             
     except Exception as e:
-        print(e)
+        print(f"Error: {e}")
         response.update({"error": True})
         response.update({"detail": "An unknown error has occurred. Please try again later."})
         return jsonify(response), 500
@@ -304,6 +322,8 @@ def crimi_del():
                 
                 with open(INFO_DB_PATH, "w") as f:
                     json.dump(db, f)
+                
+                logging.info(f"{is_auth[0]} deleted {db_item['crimi_name']}")
                 
                 response.update({"error": False})
                 response.update({"detail": "Deletion successful"})
