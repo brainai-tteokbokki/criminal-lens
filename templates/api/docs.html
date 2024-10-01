@@ -27,11 +27,11 @@
 <hr>
 
 <h2>Documentation</h2>
-<p>authKey is not a required parameter, but if you do not provide it to the server or it is incorrect, you will not be able to receive face data.</p>
+<p>authKey is not a required parameter, but if it is not provided to the server or is incorrect, you may not be able to receive face data or access some features.</p>
 <!-- /api/list documentation -->
 <div class="card mb-3">
     <div class="card-body">
-        <h5>/api/list</h5>
+        <h5>http://crimilens.dyhs.kr/api/list</h5>
         <p class="text-muted">Retrieve registered account information.</p>
         <div class="card mb-2">
             <div class="card-header">Request - Method: POST</div>
@@ -77,7 +77,7 @@
 <!-- /api/search documentation -->
 <div class="card mb-3">
     <div class="card-body">
-        <h5>/api/search</h5>
+        <h5>http://crimilens.dyhs.kr/api/search</h5>
         <p class="text-muted">API to find out what object is in the image</p>
         <div class="card mb-2">
             <div class="card-header">Request - Method: POST</div>
@@ -135,7 +135,7 @@
 <!-- /api/regi documentation -->
 <div class="card mb-3">
     <div class="card-body">
-        <h5>/api/regi</h5>
+        <h5>http://crimilens.dyhs.kr/api/regi</h5>
         <p class="text-muted">Register criminals to use when searching.</p>
         <div class="card mb-2">
             <div class="card-header">Request - Method: POST</div>
@@ -170,6 +170,56 @@
                     <tr>
                         <td>regi_time</td>
                         <td>Registration time. (%Y%m%d_%H%M%S. string)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="card">
+            <div class="card-header">Response</div>
+            <table class="table table-sm">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Key</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>error</td>
+                        <td>Did an error occur? (bool)</td>
+                    </tr>
+                    <tr>
+                        <td>detail</td>
+                        <td>Status detail (str)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- /api/del documentation -->
+<div class="card mb-3">
+    <div class="card-body">
+        <h5>http://crimilens.dyhs.kr/api/del</h5>
+        <p class="text-muted">Delete criminals with the same name.</p>
+        <div class="card mb-2">
+            <div class="card-header">Request - Method: POST</div>
+            <table class="table table-sm">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Key</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>authKey</td>
+                        <td>Authentication Key. (string)</td>
+                    </tr>
+                    <tr>
+                        <td>crimi_name</td>
+                        <td>Name of criminal to be deleted. (string)</td>
                     </tr>
                 </tbody>
             </table>
