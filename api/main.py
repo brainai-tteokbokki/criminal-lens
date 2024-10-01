@@ -80,6 +80,7 @@ def crimi_list():
                         send_db_info[-1]["crimi_face"].append(b64encode(f.read()).decode())
         
     except Exception as e:
+        print(f"Error: {e}")
         response.update({"error": True})
         response.update({"detail": "An unknown error has occurred. Please try again later."})
         return jsonify(response), 500
@@ -162,6 +163,9 @@ def crimi_search():
                 if is_auth:
                     suspect_info[-1]["crimi_face"] = b64encode(base_face_data).decode
                 break
+    
+    if os.path.exists(os.path.join(TEMP_PATH, "temp_search_input_face.jpg")):
+        os.remove(os.path.join(TEMP_PATH, "temp_search_input_face.jpg"))
     
     response.update({"error": False})
     if is_auth == True:
