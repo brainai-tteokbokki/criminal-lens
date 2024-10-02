@@ -249,18 +249,29 @@ def crimi_regi():
         ### 중복이냐?
         for db_item in db:
             if db_item["crimi_name"] == _res_regi_name:
-                old_crimi_data = db_item
-                db.remove(db_item)
-                
-                old_crimi_data["crimi_face"].append(save_file_name)
-                db.append(old_crimi_data)
-                
-                with open(INFO_DB_PATH, "w") as f:
-                    json.dump(db, f)
-                
-                response.update({"error": False})
-                response.update({"detail": "Added a photo to the previously registered information."})
-                return jsonify(response), 200
+                if is_auth == False:
+                    response.update({"error": True})
+                    response.update({"detail": "You do not have permission to add photos."})
+                    return jsonify(response), 403
+                else:
+                    if is_auth[1] == 0:
+                        old_crimi_data = db_item
+                        db.remove(db_item)
+                        
+                        old_crimi_data["crimi_face"].append(save_file_name)
+                        db.append(old_crimi_data)
+                        
+                        with open(INFO_DB_PATH, "w") as f:
+                            json.dump(db, f)
+                        
+                        response.update({"error": False})
+                        response.update({"detail": "Added a photo to the previously registered information."})
+                        return jsonify(response), 200
+                    
+                    else:
+                        response.update({"error": True})
+                        response.update({"detail": "You do not have permission to add photos."})
+                        return jsonify(response), 403
         
         ### 중복 아님
         crimi_data = {
