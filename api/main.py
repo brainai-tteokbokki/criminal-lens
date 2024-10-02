@@ -48,12 +48,8 @@ def veri_key(auth_key):
         
     for db_item in db:
         if db_item["authKey"] == auth_key:
-            if db_item["userLevel"] == 0:
-                logging.info(f"veri_auth: {client_ip()} Success. name<{db_item['userName']}> use_key<{db_item['authKey']}>")
-                return (db_item["userName"], db_item["authKey"])
-            else:
-                logging.info(f"veri_auth: {client_ip()} Low level. name<{db_item['userName']}> use_key<{db_item['authKey']}>")
-                return False
+            logging.info(f"veri_auth: {client_ip()} Success. name<{db_item['userName']}> level<{db_item['userLevel']}> use_key<{db_item['authKey']}>")
+            return (db_item["userName"], db_item['userLevel'], db_item["authKey"])
     
     logging.info(f"veri_auth: {client_ip()} Fail. use_key<{auth_key}>")
     return False
@@ -86,10 +82,11 @@ def crimi_list():
             })
             
             if is_auth != False:
-                send_db_info[-1]["crimi_face"] = []
-                for face in db_item["crimi_face"]:
-                    with open(os.path.join("db", "faces", face), "rb") as f:
-                        send_db_info[-1]["crimi_face"].append(b64encode(f.read()).decode())
+                if is_auth[1] == 0:
+                    send_db_info[-1]["crimi_face"] = []
+                    for face in db_item["crimi_face"]:
+                        with open(os.path.join("db", "faces", face), "rb") as f:
+                            send_db_info[-1]["crimi_face"].append(b64encode(f.read()).decode())
         
     except Exception as e:
         logging.error(f"Error: {e}")
@@ -167,7 +164,8 @@ def crimi_search():
                     "regi_user": db_item.get("regi_user", "Unknown")
                 })
                 if is_auth != False:
-                    similar_info[-1]["crimi_face"] = b64encode(base_face_data).decode()
+                    if is_auth[1] == 0:
+                        similar_info[-1]["crimi_face"] = b64encode(base_face_data).decode()
                 break
             elif similarity_score > SUSPECT_LEVEL:
                 suspect_info.append({
@@ -176,7 +174,8 @@ def crimi_search():
                     "regi_user": db_item.get("regi_user", "Unknown")
                 })
                 if is_auth != False:
-                    suspect_info[-1]["crimi_face"] = b64encode(base_face_data).decode
+                    if is_auth[1] == 0:
+                        suspect_info[-1]["crimi_face"] = b64encode(base_face_data).decode
                 break
     
     if os.path.exists(os.path.join(TEMP_PATH, "temp_search_input_face.jpg")):
@@ -306,6 +305,11 @@ def crimi_del():
         response.update({"error": True})
         response.update({"detail": "You do not have permission to edit this data."})
         return jsonify(response), 403
+    else:
+        if is_auth[1] != 0:
+            response.update({"error": True})
+            response.update({"detail": "You do not have permission to edit this data."})
+            return jsonify(response), 403
     
     # 필수 파라미터 확인
     if _res_del_name == None:
