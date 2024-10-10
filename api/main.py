@@ -78,7 +78,7 @@ def crimi_list():
                 "crimi_name": db_item["crimi_name"],
                 "crimi_desc": db_item["crimi_desc"],
                 "regi_time": db_item["regi_time"],
-                "regi_user": db_item.get("regi_user", "Unknown")
+                "regi_user": db_item["regi_user_name"]
             })
             
             if is_auth != False:
@@ -213,6 +213,12 @@ def crimi_regi():
         response.update({"detail": "Required parameters are missing"})
         return response, 400
     
+    # 인증 실패 시 반려
+    if is_auth == False:
+        response.update({"error": True})
+        response.update({"detail": "You do not have permission to register."})
+        return jsonify(response), 403
+    
     # 이미지 파일 아닐 경우 반려
     if utils.get_file_ext(_res_regi_face.filename) not in image_ext:
         response.update({"error": True})
@@ -278,16 +284,14 @@ def crimi_regi():
             "crimi_name": _res_regi_name,
             "crimi_desc": _res_regi_desc,
             "regi_time": _res_regi_time,
-            "crimi_face": [save_file_name]
+            "crimi_face": [save_file_name],
+            "regi_user_ip": client_ip(),
+            "regi_user_name": f"{is_auth[0]}"
         }
-        if is_auth != False:
-            crimi_data["regi_user"] = f"{client_ip()}({is_auth[0]})"
-        else:
-            crimi_data["regi_user"] = f"{client_ip()}"
-            
+        
         db.append(crimi_data)
         with open(INFO_DB_PATH, "w") as f:
-            json.dump(db, f)
+            json.dump(db, f, indent=4)
         
         logging.info(f"{crimi_data['regi_user']} registered {crimi_data['crimi_name']}")
         

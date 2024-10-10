@@ -36,7 +36,7 @@ def handle_exception(e):
     
     if code == 404:
         response.update({"detail": "This is not a valid endpoint."})
-        
+    
     print(f"Error: {message}")
     
     return jsonify(response), code
