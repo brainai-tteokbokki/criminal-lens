@@ -78,7 +78,7 @@ def crimi_list():
                 "crimi_name": db_item["crimi_name"],
                 "crimi_desc": db_item["crimi_desc"],
                 "regi_time": db_item["regi_time"],
-                "regi_user": db_item["regi_user_name"]
+                "regi_user_name": db_item["regi_user_name"]
             })
             
             if is_auth != False:
@@ -150,6 +150,9 @@ def crimi_search():
         db = json.load(f)
     
     for db_item in db:
+        is_similar = False
+        is_suspect = False
+        
         for face in db_item["crimi_face"]:
             base_face_path = os.path.join("db", "faces", face)
             with open(base_face_path, "rb") as base_face:
@@ -158,25 +161,33 @@ def crimi_search():
             similarity_score = FaceRecodation.compare_faces(os.path.join(TEMP_PATH, "temp_search_input_face.jpg"), base_face_path)
             
             if similarity_score > SIMILAR_LEVEL:
-                similar_info.append({
-                    "crimi_name": db_item["crimi_name"],
-                    "crimi_desc": db_item["crimi_desc"],
-                    "regi_user": db_item.get("regi_user", "Unknown")
-                })
-                if is_auth != False:
-                    if is_auth[1] == 0:
-                        similar_info[-1]["crimi_face"] = b64encode(base_face_data).decode()
+                is_similar = True
                 break
             elif similarity_score > SUSPECT_LEVEL:
-                suspect_info.append({
-                    "crimi_name": db_item["crimi_name"],
-                    "crimi_desc": db_item["crimi_desc"],
-                    "regi_user": db_item.get("regi_user", "Unknown")
-                })
-                if is_auth != False:
-                    if is_auth[1] == 0:
-                        suspect_info[-1]["crimi_face"] = b64encode(base_face_data).decode
-                break
+                is_suspect = True
+        
+        if is_suspect == True:
+            suspect_info.append({
+                "crimi_name": db_item["crimi_name"],
+                "crimi_desc": db_item["crimi_desc"],
+                "regi_user": db_item.get("regi_user", "Unknown")
+            })
+            if is_auth != False:
+                if is_auth[1] == 0:
+                    suspect_info[-1]["crimi_face"] = b64encode(base_face_data).decode
+            
+            continue
+        
+        elif is_similar == True:
+            similar_info.append({
+                "crimi_name": db_item["crimi_name"],
+                "crimi_desc": db_item["crimi_desc"],
+                "regi_user": db_item.get("regi_user", "Unknown")
+            })
+            if is_auth != False:
+                if is_auth[1] == 0:
+                    similar_info[-1]["crimi_face"] = b64encode(base_face_data).decode()
+            
     
     if os.path.exists(os.path.join(TEMP_PATH, "temp_search_input_face.jpg")):
         os.remove(os.path.join(TEMP_PATH, "temp_search_input_face.jpg"))
