@@ -12,16 +12,18 @@ DB_FACE_PATH = os.path.join(DB_PATH, "faces")
 INFO_DB_PATH = os.path.join(DB_PATH, "info.json")
 AUTH_DB_PATH = os.path.join(DB_PATH, "auth.json")
 
-detection_model_path = "/home/azureuser/server/src/models/face-detection-adas-0001"
-reid_model_path = "/home/azureuser/server/src/models/face-reidentification-retail-0095"
+detection_model_path = "./src/models/face-detection-adas-0001"
+reid_model_path = "./src/models/face-reidentification-retail-0095"
 
 api = Blueprint('api', __name__, url_prefix='/api')
 FaceRecodation = utils.FaceRecognition(detection_model_path, reid_model_path)
 
-logging.basicConfig(filename=os.path.join(LOG_PATH, 'access.log'), level=logging.INFO, format='%(asctime)s %(levelname)-8s %(message)s', encoding='utf-8')
-
 if not os.path.exists(LOG_PATH):
     os.makedirs(LOG_PATH)
+if not os.path.exists(os.path.join(LOG_PATH, "access.log")):
+    with open(os.path.join(LOG_PATH, "access.log"), "w") as f:
+        f.write("")
+logging.basicConfig(filename=os.path.join(LOG_PATH, 'access.log'), level=logging.INFO, format='%(asctime)s %(levelname)-8s %(message)s', encoding='utf-8')
 
 if not os.path.exists(DB_PATH):
     os.makedirs(DB_PATH)
