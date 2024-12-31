@@ -1,0 +1,11 @@
+[Unit]
+Description=Criminal Lens Server
+After=network.target
+
+[Service]
+ExecStart=/bin/sudo /bin/bash /home/azureuser/criminal-lens/stater.sh
+Restart=always
+User=root
+
+[Install]
+WantedBy=multi-user.target
